@@ -1,0 +1,31 @@
+set search_path to store;
+
+CREATE TABLE IF NOT EXISTS goods (
+    id BIGSERIAL PRIMARY KEY,
+    goods_name varchar,
+    price_per_one money,
+    quantity int8,
+    code varchar UNIQUE,
+    id_shop bigint references shop(id)
+
+);
+
+CREATE TABLE IF NOT EXISTS shop (
+    id BIGSERIAL PRIMARY KEY,
+    shop_name VARCHAR,
+    address VARCHAR UNIQUE
+);
+
+
+CREATE TABLE IF NOT EXISTS buyer (
+    id BIGSERIAL PRIMARY KEY,
+    fio varchar,
+    email varchar UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS sell (
+    id BIGSERIAL PRIMARY KEY,
+    id_goods BIGINT references goods(id),
+    id_buyer BIGINT references buyer(id),
+    quantity_goods int8
+);
